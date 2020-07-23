@@ -31,7 +31,8 @@ if [[ "${__GIT_PROMPT_WITH_USERNAME_AND_REPO:-0}" == "1" ]]; then
   # https://github.com/user/repo.git
   # git@github.com:user/repo.git
   #
-  remote_url=$(git config --get remote.origin.url | sed 's|^.*//||; s/.*@//; s/[^:/]\+[:/]//; s/.git$//')
+  # remote_url=$(git config --get remote.origin.url | sed 's|^.*//||; s/.*@//; s/[^:/]\+[:/]//; s/.git$//')
+  remote_url=$(git config --get remote.origin.url | sed -e 's/^.*[:\/][^/]*\/\([^\/]*\)/\1/' -e 's/.git$//')
 else
   remote_url='.'
 fi
